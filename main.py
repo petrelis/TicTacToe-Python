@@ -2,6 +2,7 @@ positions = [[0,0,0],
              [0,0,0],
              [0,0,0]]
 
+#Prints array values on a board
 def Display(positions):
 
     for i in range(len(positions)):
@@ -17,6 +18,7 @@ def Display(positions):
         i += 1
     print()
 
+#Asks for player input and changes array value accordingly
 def PlaceXO(index):
     print("Choose a position(1-" + str(len(positions) * len(positions[0])) + "): ", end="")
     x = getInput()
@@ -36,7 +38,7 @@ def PlaceXO(index):
         positions[move_y][move_x] = "X"
     else: positions[move_y][move_x]= "O"
 
-
+#checks for both player wins. If game is not won calls PlaceXO and Display methods and checks for wins again
 def Win(positions):
     index=0
     won = False
@@ -58,6 +60,7 @@ def Win(positions):
             x_count_v=0
             o_count_v=0
             
+            #checks for diagonal X wins
             if positions[i][i] == "X":
                 x_count_d = x_count_d + 1
                 if x_count_d == len(positions[0]): 
@@ -65,6 +68,7 @@ def Win(positions):
                     print("X won!")
                     break
             
+            #checks for backwards diagonal X wins
             n=len(positions[0])-i-1
             if positions[i][n] == "X":
                 x_count_d_back = x_count_d_back + 1
@@ -73,6 +77,7 @@ def Win(positions):
                     print("X won!")
                     break
 
+            #checks for diagonal O wins
             if positions[i][i] == "O":
                 o_count_d = o_count_d + 1
                 if o_count_d == len(positions[0]): 
@@ -80,6 +85,7 @@ def Win(positions):
                     print("O won!")
                     break
             
+            #checks for backwards diagonal O wins
             n=len(positions[0])-i-1
             if positions[i][n] == "O":
                 o_count_d_back = o_count_d_back + 1
@@ -136,13 +142,14 @@ def getInput():
             value = "not valid"
     return int(value)
 
+#clears all array values
 def clear():
     for i in range(len(positions)):
         for j in range(len(positions[0])):
             positions[i][j] = 0
 
 
-
+#main
 playagain = "y"
 while playagain == "y":
     print()
